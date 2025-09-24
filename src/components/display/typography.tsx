@@ -71,14 +71,14 @@ const variantElementMap = {
 } as const;
 
 export interface TypographyProps
-  extends React.HTMLAttributes<HTMLElement>,
+  extends Omit<React.HTMLAttributes<HTMLElement>, 'color'>,
     VariantProps<typeof typographyVariants> {
   component?: React.ElementType;
 }
 
 const Typography = React.forwardRef<HTMLElement, TypographyProps>(
   ({ className, variant = 'body1', color, align, noWrap, gutterBottom, component, children, ...props }, ref) => {
-    const Component = component || variantElementMap[variant] || 'p';
+    const Component = component || (variant ? variantElementMap[variant] : null) || 'p';
 
     return (
       <Component
