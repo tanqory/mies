@@ -50,3 +50,9 @@ coverage/
 # Temporary folders
 tmp/
 temp/
+
+# Examples - ignore node_modules and build artifacts
+examples/*/node_modules/
+examples/*/.next/
+examples/*/build/
+examples/*/dist/
