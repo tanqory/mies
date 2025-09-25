@@ -2,6 +2,7 @@
   "name": "@tanqory/mies",
   "version": "0.1.0",
   "description": "Tanqory Design System - Mies UI Components Library",
+  "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
@@ -96,5 +97,12 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/tanqory/mies"
+  },
+  "homepage": "https://github.com/tanqory/mies#readme",
+  "bugs": {
+    "url": "https://github.com/tanqory/mies/issues"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
