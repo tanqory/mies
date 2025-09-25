@@ -9,7 +9,10 @@ export default defineConfig({
     dts({
       include: ['src/**/*'],
       exclude: ['src/**/*.stories.*', 'src/**/*.test.*'],
-      copyDtsFiles: true
+      outDir: 'dist',
+      copyDtsFiles: false,
+      staticImport: true,
+      rollupTypes: false
     })
   ],
   build: {
@@ -24,6 +27,7 @@ export default defineConfig({
         'react',
         'react-dom',
         'react/jsx-runtime',
+        'react/jsx-dev-runtime',
         /^@radix-ui/,
         'class-variance-authority',
         'clsx',
