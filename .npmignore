@@ -1,0 +1,45 @@
+# Source files
+src/
+*.stories.*
+*.test.*
+*.spec.*
+
+# Development files
+.git/
+.github/
+.vscode/
+.idea/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build tools
+vite.config.ts
+tsconfig.json
+tailwind.config.js
+postcss.config.js
+
+# Development dependencies
+node_modules/
+coverage/
+.nyc_output/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Examples and demos
+example.js
+examples/
+demo/
+docs/
+
+# Miscellaneous
+*.tgz
+*.tar.gz
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
