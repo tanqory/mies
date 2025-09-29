@@ -1,0 +1,239 @@
+/* Storybook dark mode styles */
+html, body {
+  margin: 0;
+  padding: 0;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Light theme (default) */
+.sb-show-main {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+}
+
+/* Dark theme */
+.dark .sb-show-main,
+html.dark .sb-show-main,
+body.dark .sb-show-main {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+}
+
+/* Apply dark theme to html and body */
+html.dark,
+body.dark {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+}
+
+/* Docs page specific styles */
+.docs-story {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+
+/* Remove canvas wrapper styling in docs */
+.docs-story .sb-story {
+  background: transparent !important;
+  border: none !important;
+  padding: 1rem !important;
+}
+
+/* Dark mode docs fixes */
+.dark .docs-story,
+.dark .docs-story .sb-story {
+  background: transparent !important;
+  border: none !important;
+}
+
+/* Story preview container */
+.sb-story {
+  background: transparent !important;
+}
+
+/* Remove any unwanted borders/shadows */
+.docs-story > div {
+  border: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+}
+
+/* Full width docs stories */
+.docs-story {
+  width: 100% !important;
+  max-width: none !important;
+}
+
+/* Story wrapper in docs */
+.sb-story--docs {
+  background: transparent !important;
+  border: none !important;
+}
+
+/* Canvas wrapper */
+.sb-story__wrapper {
+  background: transparent !important;
+}
+
+/* Remove iframe borders and backgrounds */
+.docs-story iframe {
+  background: transparent !important;
+  border: none !important;
+}
+
+/* Story canvas in docs */
+.sb-story-canvas {
+  background: transparent !important;
+  border: none !important;
+}
+
+/* Docs container */
+.sbdocs-content {
+  max-width: none !important;
+}
+
+/* Story block */
+.docblock-story {
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* Preview wrapper */
+.sb-preview {
+  background: transparent !important;
+  border: none !important;
+}
+
+/* Story preview in docs */
+.sb-story-preview {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Remove default story wrapper padding */
+.sb-story--docs-only {
+  background: transparent !important;
+  padding: 0 !important;
+}
+
+/* Remove ALL borders, shadows, and backgrounds from docs stories */
+.docs-story,
+.docs-story *,
+.sb-story,
+.sb-story *,
+.sb-preview,
+.sb-preview *,
+.docblock-story,
+.docblock-story * {
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+/* Light theme backgrounds */
+.docs-story,
+.sb-story,
+.sb-preview,
+.docblock-story,
+.sb-story-canvas,
+.sb-story__wrapper {
+  background: #ffffff !important;
+  background-color: #ffffff !important;
+  transition: background-color 0.2s ease !important;
+}
+
+/* Dark mode backgrounds */
+.dark .docs-story,
+.dark .sb-story,
+.dark .sb-preview,
+.dark .docblock-story,
+.dark .sb-story-canvas,
+.dark .sb-story__wrapper {
+  background: #000000 !important;
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  border: none !important;
+  transition: background-color 0.2s ease !important;
+}
+
+/* Story root follows theme */
+#storybook-root {
+  background: inherit !important;
+  background-color: inherit !important;
+}
+
+.dark #storybook-root {
+  background: #000000 !important;
+  background-color: #000000 !important;
+}
+
+/* Story block wrapper */
+.sb-story-block {
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* Canvas story */
+.sb-story-canvas,
+.sb-story-canvas > div {
+  background: transparent !important;
+  border: none !important;
+}
+
+/* Preview container in docs */
+.preview-container {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Storybook canvas wrapper */
+#storybook-root {
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.dark #storybook-root {
+  background-color: #000000;
+  color: #ffffff;
+}
+
+/* Ensure story preview respects theme */
+.sb-show-main .sb-story {
+  background: transparent;
+}
+
+/* Fix iframe content */
+.sb-show-main iframe {
+  background: transparent;
+}
+
+/* Override any conflicting styles */
+.sb-show-main .docs-story {
+  background: transparent !important;
+}
+
+/* Custom scrollbars for dark mode */
+.dark ::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: #1a1a1a;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #333333;
+  border-radius: 4px;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #444444;
+}

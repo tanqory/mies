@@ -46,6 +46,15 @@ export * from './components/ui/toggle'
 export * from './components/ui/toggle-group'
 export * from './components/ui/tooltip'
 
+// New MUI-equivalent components
+export * from './components/ui/autocomplete'
+export * from './components/ui/data-grid'
+export * from './components/ui/date-picker'
+export * from './components/ui/rating'
+export * from './components/ui/stepper'
+export * from './components/ui/timeline'
+export * from './components/ui/tree-view'
+
 // Utilities
 export * from './components/ui/utils'
 export * from './components/ui/use-mobile'
@@ -58,3 +67,67 @@ export * as LucideIcons from 'lucide-react'
 
 // Charts
 export * as ReCharts from 'recharts'
+
+// Component Blocks - Export selectively to avoid conflicts
+export {
+  // Animation blocks
+  CountUpCard, TextReveal, ScrollToTop,
+  AnimateCountUp, AnimateText, BackToTopButton, MotionContainer,
+
+  // Media blocks
+  ImageGallery, MediaCarousel, FileUploader,
+
+  // Navigation blocks
+  Breadcrumbs as BlockBreadcrumbs,
+  BreadcrumbNav,
+  MegaMenu as BlockMegaMenu,
+  Sidebar as BlockSidebar,
+
+  // Layout blocks
+  HeroSection, FeatureGrid, Footer,
+
+  // Form blocks
+  ContactForm, LoginForm, SearchBar,
+
+  // Dialog blocks
+  ConfirmDialog as BlockConfirmDialog,
+  ToastProvider, useToast, toast,
+
+  // Data visualization blocks
+  StatsCards, DataTable as BlockDataTable, ChartWidget,
+  AnalyticsChart, DashboardCharts, DataTableAdvanced,
+
+  // Carousel blocks
+  ImageCarousel, TestimonialCarousel, ProductCarousel,
+
+  // Other component blocks
+  ColorPicker, CountrySelect, EmptyState, LoadingSpinner,
+
+  // Block collections
+  AnimationBlocks, MediaBlocks, DataVizBlocks, NavigationBlocks,
+  FormBlocks, LayoutBlocks, DialogBlocks, UtilityBlocks
+} from './blocks';
+
+// Export types separately to avoid conflicts
+export type {
+  // Navigation types with prefixes
+  BreadcrumbItem as BlockBreadcrumbItem,
+  BreadcrumbNavItem, BreadcrumbNavProps,
+  MegaMenuItem, MegaMenuSection, MegaMenuProps,
+  SidebarItem, SidebarProps,
+
+  // Layout types
+  HeroAction, HeroSectionProps,
+  Feature, FeatureGridProps,
+  FooterLink, FooterSection, SocialLink, FooterProps,
+
+  // Media types
+  GalleryImage, ImageGalleryProps,
+  MediaItem, MediaCarouselProps,
+  FileItem, FileUploaderProps,
+
+  // Date picker with prefix
+  DateRangePicker as BlockDateRangePickerComponent,
+  DateRangePickerProps as BlockDateRangePickerProps,
+  DateRange
+} from './blocks';

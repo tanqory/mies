@@ -56,3 +56,5 @@ examples/*/node_modules/
 examples/*/.next/
 examples/*/build/
 examples/*/dist/
+polaris-core-main
+polaris-main

@@ -52,6 +52,14 @@ module.exports = {
           "4": "hsl(var(--chart-4))",
           "5": "hsl(var(--chart-5))",
         },
+        hover: {
+          primary: "var(--hover-primary)",
+          secondary: "var(--hover-secondary)",
+          muted: "var(--hover-muted)",
+          accent: "var(--hover-accent)",
+          ghost: "var(--hover-ghost)",
+          outline: "var(--hover-outline)",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",

@@ -17,10 +17,18 @@ export default defineConfig({
   ],
   build: {
     lib: {
-      entry: resolve(__dirname, 'src/index.ts'),
+      entry: {
+        index: resolve(__dirname, 'src/index.ts'),
+        'x/index': resolve(__dirname, 'src/x/index.ts')
+      },
       name: 'TanqoryMies',
       formats: ['es', 'cjs'],
-      fileName: (format) => `index.${format === 'es' ? 'mjs' : 'js'}`
+      fileName: (format, entryName) => {
+        if (entryName === 'x/index') {
+          return `x/index.${format === 'es' ? 'mjs' : 'js'}`
+        }
+        return `index.${format === 'es' ? 'mjs' : 'js'}`
+      }
     },
     rollupOptions: {
       external: [
@@ -29,6 +37,8 @@ export default defineConfig({
         'react/jsx-runtime',
         'react/jsx-dev-runtime',
         /^@radix-ui/,
+        /^@dnd-kit/,
+        /^@tanstack/,
         'class-variance-authority',
         'clsx',
         'cmdk',

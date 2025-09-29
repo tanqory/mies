@@ -1,18 +1,20 @@
-# @tanqory/mies - React.js 18 Example
+# @tanqory/mies - React.js 19 Example
 
-A comprehensive showcase of the `@tanqory/mies` component library in a production-ready React.js 18 application with Create React App.
+A comprehensive showcase of the `@tanqory/mies` component library in a production-ready React.js 19 application with Create React App.
 
 ## 🚀 Features
 
-- ✅ **React 18** - Latest React with concurrent features
+- ✅ **React 19** - Latest React with cutting-edge features
 - ✅ **Create React App 5** - Zero-configuration development setup
 - ✅ **TypeScript** - Full type safety and IntelliSense
-- ✅ **@tanqory/mies Components** - 48+ modern UI components
+- ✅ **@tanqory/mies Components** - 110+ modern UI components
 - ✅ **Dark/Light Theme** - Seamless theme switching with persistence
-- ✅ **Responsive Design** - Mobile-first approach with Tailwind CSS
+- ✅ **Responsive Design** - Mobile-first approach with CSS-in-JS
 - ✅ **Interactive Examples** - Real component interactions and demos
 - ✅ **Hot Reload** - Instant development feedback
 - ✅ **Production Ready** - Optimized build and deployment ready
+- ✅ **Comprehensive Coverage** - Core Components, Extended Components (Mies X), Component Blocks
+- ✅ **Foundation Elements** - Colors, Typography, Icons, Grid System, Shadows
 
 ## 🏃‍♂️ Quick Start
 
@@ -52,49 +54,73 @@ npm test
 
 ```
 src/
-├── App.tsx             # Main application component
-├── index.tsx           # React application entry point
-├── index.css           # Global styles and @tanqory/mies import
-├── tanqory-mies.css    # Component library styles (CRA compatible)
-└── ...
+├── App.tsx                     # Main application with routing
+├── index.tsx                   # React application entry point
+├── index.css                   # Global styles and CSS variables
+├── components/
+│   └── Navigation.tsx          # Navigation layout component
+├── pages/
+│   ├── HomePage.tsx           # Homepage with component showcase
+│   ├── ComponentsPage.tsx     # Core components demonstrations
+│   └── FoundationPage.tsx     # Design system foundations
+└── types/                     # TypeScript type definitions
 ```
 
-## 🎯 Components Showcased
+## 🎯 Component Library Coverage
 
-### 🔘 Form Elements
-- **Buttons** - All variants with size options and states
-- **Input Fields** - Text inputs with proper form handling
-- **Textareas** - Multi-line text input with validation
-- **Checkboxes** - Single and multi-select with proper state management
-- **Switches** - Toggle controls for settings and preferences
-- **Form Validation** - Real-time validation feedback
+### 🏠 **Core Components (48)**
+- **Buttons** - All variants (primary, secondary, outline, ghost, destructive)
+- **Form Elements** - Input, Textarea, Select, Checkbox, Switch, Radio Group
+- **Data Display** - Badge, Avatar, Table, Progress, Skeleton
+- **Layout** - Card, Separator, Accordion, Tabs
+- **Feedback** - Alert, Dialog, Progress indicators
+- **Navigation** - Responsive sidebar with grouped categories
 
-### 📊 Data Display
-- **Badges** - Status indicators with semantic colors
-- **Avatars** - User profile images with intelligent fallbacks
-- **Progress Bars** - Loading states and completion tracking
-- **Skeletons** - Loading placeholders for better UX
-- **Cards** - Flexible content containers with headers
+### ⚡ **Extended Components (Mies X - 13)**
+- **TopBar** - Application header with logo, search, notifications
+- **Page Layout** - Complete page wrapper with actions and breadcrumbs
+- **Enhanced Inputs** - Chips, Range, Autocomplete with filtering
+- **Advanced UI** - CalloutCard, EmptyState, DropZone, DragDrop
+- **Filters** - IndexFilters with search, tabs, and sort options
+- **Notifications** - Toast-style notifications with auto-dismiss
 
-### 🧭 Navigation & Layout
-- **Tabs** - Content organization with keyboard navigation
-- **Dashboard Layout** - Professional dashboard interface
-- **Responsive Grid** - CSS Grid and Flexbox layouts
+### 🧱 **Component Blocks (50+)**
+- **Animation Blocks** - Count-up animations, text reveals, motion containers
+- **Media Blocks** - Image galleries, carousels with autoplay and thumbnails
+- **DataViz Blocks** - Charts, tables, and data visualization components
+- **Form Blocks** - Multi-step forms, wizards with validation and progress
+- **Layout Blocks** - Hero sections, feature grids, and footer layouts
+- **Navigation Blocks** - Navigation menus, breadcrumbs, and sidebar components
+- **Upload Blocks** - File upload with drag & drop and progress tracking
+- **DND Blocks** - Drag & drop: sortable lists, kanban boards, drop zones
+- **Multi-Language** - Internationalization with language switching support
+- **Utility Blocks** - Color pickers, loading states, and empty state screens
 
-### 🎨 Theming & Styling
-- **Theme Toggle** - Instant dark/light mode switching
-- **Theme Persistence** - LocalStorage-based preference saving
-- **Smooth Transitions** - CSS transitions for theme changes
-- **Custom Properties** - CSS custom properties for theming
+### 🎨 **Foundation Elements**
+- **Colors** - 3-color palette (Black, White, Tanqory Yellow)
+- **Typography** - 12 text styles with responsive sizing
+- **Icons** - 1000+ Lucide React icons via LucideIcons namespace
+- **Grid System** - 12-column responsive grid with consistent spacing
+- **Shadows** - 6-level elevation system for depth and hierarchy
 
 ## 🔧 Key Implementation Details
 
 ### Theme Provider Setup
 ```tsx
 // App.tsx
+import React, { useState } from 'react';
 import { ThemeProvider } from '@tanqory/mies';
+import { PageLayout } from './components/Navigation';
+import HomePage from './pages/HomePage';
 
 function App() {
+  const [currentPath, setCurrentPath] = useState('/');
+
+  const handleNavigate = (path: string) => {
+    setCurrentPath(path);
+    window.history.pushState({}, '', path);
+  };
+
   return (
     <ThemeProvider
       attribute="class"
@@ -103,7 +129,9 @@ function App() {
       disableTransitionOnChange={false}
       storageKey="tanqory-react-theme"
     >
-      <ComponentShowcase />
+      <PageLayout currentPath={currentPath} onNavigate={handleNavigate}>
+        <HomePage onNavigate={handleNavigate} />
+      </PageLayout>
     </ThemeProvider>
   );
 }
@@ -111,19 +139,35 @@ function App() {
 
 ### Theme Toggle Component
 ```tsx
+// components/Navigation.tsx
+import { useTheme, Button, LucideIcons } from '@tanqory/mies';
+
 function ThemeToggle() {
   const { theme, setTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
+  const [mounted, setMounted] = React.useState(false);
 
   React.useEffect(() => setMounted(true), []);
 
   if (!mounted) {
-    return <Button disabled>Loading...</Button>;
+    return (
+      <Button variant="ghost" size="sm" disabled>
+        <LucideIcons.Sun className="h-4 w-4" />
+      </Button>
+    );
   }
 
   return (
-    <Button onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}>
-      {theme === 'dark' ? '🌙' : '🌞'} Toggle Theme ({theme})
+    <Button
+      variant="ghost"
+      size="sm"
+      onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+    >
+      {theme === 'dark' ? (
+        <LucideIcons.Moon className="h-4 w-4" />
+      ) : (
+        <LucideIcons.Sun className="h-4 w-4" />
+      )}
+      <span className="sr-only">Toggle theme</span>
     </Button>
   );
 }
@@ -172,10 +216,12 @@ function MyComponent() {
 
 ## 🛠 Technologies
 
-- **React 18** - Latest React with concurrent rendering
+- **React 19** - Latest React with cutting-edge features
 - **Create React App 5** - Modern build tooling and configuration
 - **TypeScript 4** - Enhanced type safety and IntelliSense
-- **@tanqory/mies** - Modern component library with Tailwind CSS
+- **@tanqory/mies** - Modern component library with 110+ components
+- **CSS Variables** - Theme system with CSS custom properties
+- **Lucide React Icons** - 1000+ icons via LucideIcons namespace
 - **Jest & Testing Library** - Comprehensive testing setup
 - **ESLint & Prettier** - Code quality and formatting
 
@@ -276,8 +322,9 @@ npm run build
 ```
 
 **CSS not loading properly:**
-- Check that `@import '@tanqory/mies/styles.css';` is in `src/index.css`
-- Ensure the CSS file path is correct for your setup
+- Ensure CSS variables are properly defined in `src/index.css`
+- Check that component library styles are loading correctly
+- Verify theme variables are set for both light and dark modes
 
 ## 🤝 Contributing
 

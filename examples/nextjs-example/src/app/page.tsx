@@ -1,6 +1,7 @@
 'use client';
 
-// Import core components only to avoid SSR issues
+import React from 'react';
+import Link from 'next/link';
 import {
   Button,
   Card,
@@ -9,362 +10,382 @@ import {
   CardHeader,
   CardTitle,
   Badge,
-  Input,
-  Textarea,
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-  Switch,
-  Checkbox,
-  RadioGroup,
-  RadioGroupItem,
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
   Alert,
   AlertDescription,
   AlertTitle,
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
   Progress,
-  Skeleton,
-  Separator,
-  useTheme,
   LucideIcons,
 } from '@tanqory/mies';
-import { useState, useEffect } from 'react';
+import { PageLayout } from '../components/navigation';
 
-function ThemeToggle() {
-  const { theme, setTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
+// Core UI Components (48)
+const coreComponents = [
+  {
+    name: 'Core Components',
+    description: 'Basic UI building blocks - buttons, inputs, cards, tables',
+    href: '/components',
+    icon: LucideIcons.Grid3X3,
+    color: 'bg-primary',
+    stats: '48 Components'
+  },
+  {
+    name: 'Dashboard',
+    description: 'Complete dashboard layouts with analytics and data visualization',
+    href: '/dashboard',
+    icon: LucideIcons.LayoutDashboard,
+    color: 'bg-accent',
+    stats: '4 Dashboard Types'
+  },
+];
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+// Extended Components (13 - Mies X)
+const extendedComponents = [
+  {
+    name: 'Mies X Extended',
+    description: 'Advanced dashboard components via @tanqory/mies/x',
+    href: '/components/mies-x',
+    icon: LucideIcons.Zap,
+    color: 'bg-violet-600',
+    stats: '13 Extended Components'
+  },
+];
 
-  if (!mounted) {
-    return (
-      <Button
-        variant="outline"
-        size="sm"
-        disabled
-      >
-        <LucideIcons.Sun className="h-4 w-4" />
-        <span className="ml-2">Toggle Theme (loading...)</span>
-      </Button>
-    );
-  }
+// Component Blocks (50+)
+const componentBlocks = [
+  {
+    name: 'Animation Blocks',
+    description: 'Count-up animations, text reveals, and motion containers',
+    href: '/animation',
+    icon: LucideIcons.TrendingUp,
+    color: 'bg-blue-600',
+    stats: '7 Animation Types'
+  },
+  {
+    name: 'Media Blocks',
+    description: 'Image galleries, carousels with autoplay and thumbnails',
+    href: '/carousel',
+    icon: LucideIcons.Images,
+    color: 'bg-green-600',
+    stats: '6 Media Types'
+  },
+  {
+    name: 'DataViz Blocks',
+    description: 'Charts, tables, and data visualization components',
+    href: '/charts',
+    icon: LucideIcons.BarChart,
+    color: 'bg-purple-600',
+    stats: '6 Chart Types'
+  },
+  {
+    name: 'Form Blocks',
+    description: 'Multi-step forms, wizards with validation and progress',
+    href: '/form-wizard',
+    icon: LucideIcons.FileText,
+    color: 'bg-indigo-600',
+    stats: '8 Form Types'
+  },
+  {
+    name: 'Layout Blocks',
+    description: 'Hero sections, feature grids, and footer layouts',
+    href: '/layout',
+    icon: LucideIcons.Layout,
+    color: 'bg-pink-600',
+    stats: '3 Layout Types'
+  },
+  {
+    name: 'Navigation Blocks',
+    description: 'Navigation menus, breadcrumbs, and sidebar components',
+    href: '/navigation',
+    icon: LucideIcons.Navigation,
+    color: 'bg-teal-600',
+    stats: '4 Navigation Types'
+  },
+  {
+    name: 'Upload Blocks',
+    description: 'File upload with drag & drop and progress tracking',
+    href: '/upload',
+    icon: LucideIcons.Upload,
+    color: 'bg-orange-600',
+    stats: '3 Upload Types'
+  },
+  {
+    name: 'DND Blocks',
+    description: 'Drag & drop: sortable lists, kanban boards, drop zones',
+    href: '/dnd',
+    icon: LucideIcons.Move,
+    color: 'bg-red-600',
+    stats: '4 DND Patterns'
+  },
+  {
+    name: 'Multi-Language',
+    description: 'Internationalization with language switching support',
+    href: '/multi-language',
+    icon: LucideIcons.Globe,
+    color: 'bg-emerald-600',
+    stats: '7 i18n Features'
+  },
+  {
+    name: 'Utility Blocks',
+    description: 'Color pickers, loading states, and empty state screens',
+    href: '/utilities',
+    icon: LucideIcons.Settings,
+    color: 'bg-slate-600',
+    stats: '5 Utility Types'
+  },
+];
 
-  return (
-    <Button
-      variant="outline"
-      size="sm"
-      onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-    >
-      {theme === 'dark' ? <LucideIcons.Moon className="h-4 w-4" /> : <LucideIcons.Sun className="h-4 w-4" />}
-      <span className="ml-2">Toggle Theme</span>
-    </Button>
-  );
-}
+const allFeatures = [...coreComponents, ...extendedComponents, ...componentBlocks];
+
+const stats = [
+  { name: 'Core Components', value: '48', description: 'Basic UI building blocks' },
+  { name: 'Extended Components', value: '13', description: 'Mies X advanced components' },
+  { name: 'Component Blocks', value: '50+', description: 'Pre-built complex patterns' },
+  { name: 'Total Coverage', value: '110+', description: 'Complete component library' },
+];
 
 export default function Home() {
-  const [inputValue, setInputValue] = useState('');
-  const [isChecked, setIsChecked] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-
-  const handleLoadingDemo = () => {
-    setIsLoading(true);
-    setTimeout(() => setIsLoading(false), 2000);
-  };
-
   return (
-    <main className="min-h-screen p-8 bg-background text-foreground">
-      <div className="max-w-6xl mx-auto space-y-8">
-        {/* Header */}
-        <div className="flex items-center justify-between">
-          <div>
-            <h1 className="text-4xl font-bold mb-2">@tanqory/mies</h1>
-            <p className="text-muted-foreground">Next.js 15 Example - Component Showcase</p>
+    <PageLayout>
+      <div className="max-w-7xl mx-auto space-y-12">
+        {/* Hero Section */}
+        <div className="text-center space-y-6">
+          <div className="space-y-4">
+            <Badge variant="secondary" className="px-3 py-1">
+              Next.js 15 • App Router • TypeScript
+            </Badge>
+            <h1 className="text-4xl font-bold tracking-tight sm:text-6xl">
+              @tanqory/mies
+            </h1>
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+              A comprehensive React component library with 110+ components including Core UI,
+              Extended Components (Mies X), and pre-built Component Blocks for rapid development.
+            </p>
           </div>
-          <ThemeToggle />
+          <div className="flex gap-4 justify-center">
+            <Button asChild size="lg">
+              <Link href="/components">
+                <LucideIcons.Rocket className="mr-2 h-4 w-4" />
+                Explore Components
+              </Link>
+            </Button>
+            <Button variant="outline" size="lg" asChild>
+              <Link href="https://github.com/tanqory/mies" target="_blank">
+                <LucideIcons.Github className="mr-2 h-4 w-4" />
+                View on GitHub
+              </Link>
+            </Button>
+          </div>
         </div>
 
         {/* Alert */}
         <Alert>
           <LucideIcons.Info className="h-4 w-4" />
-          <AlertTitle>Welcome!</AlertTitle>
+          <AlertTitle>Welcome to @tanqory/mies!</AlertTitle>
           <AlertDescription>
-            This is a demonstration of the @tanqory/mies component library running in Next.js 15 with App Router.
+            Explore our comprehensive component library with real-world examples and interactive demos.
           </AlertDescription>
         </Alert>
 
-        {/* Buttons & Actions */}
-        <Card>
-          <CardHeader>
-            <CardTitle>Buttons & Actions</CardTitle>
-            <CardDescription>Different button variants and interactive elements</CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="flex gap-2 flex-wrap">
-              <Button>Primary</Button>
-              <Button variant="secondary">Secondary</Button>
-              <Button variant="outline">Outline</Button>
-              <Button variant="ghost">Ghost</Button>
-              <Button variant="destructive">Destructive</Button>
-              <Button disabled>Disabled</Button>
-            </div>
-
-            <div className="flex gap-2 items-center flex-wrap">
-              <Button size="sm">Small</Button>
-              <Button size="default">Default</Button>
-              <Button size="lg">Large</Button>
-              <Button size="icon">
-                <LucideIcons.Heart className="h-4 w-4" />
-              </Button>
-            </div>
-
-            <div className="flex gap-2 items-center flex-wrap">
-              <Button onClick={handleLoadingDemo} disabled={isLoading}>
-                {isLoading ? (
-                  <>
-                    <LucideIcons.Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                    Loading...
-                  </>
-                ) : (
-                  <>
-                    <LucideIcons.Download className="h-4 w-4 mr-2" />
-                    Start Download
-                  </>
-                )}
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Form Elements */}
-        <Card>
-          <CardHeader>
-            <CardTitle>Form Elements</CardTitle>
-            <CardDescription>Input fields and form controls</CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <label className="text-sm font-medium">Name</label>
-                <Input
-                  placeholder="Enter your name"
-                  value={inputValue}
-                  onChange={(e) => setInputValue(e.target.value)}
-                />
-              </div>
-
-              <div className="space-y-2">
-                <label className="text-sm font-medium">Country</label>
-                <Select>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select country" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="us">United States</SelectItem>
-                    <SelectItem value="th">Thailand</SelectItem>
-                    <SelectItem value="jp">Japan</SelectItem>
-                    <SelectItem value="uk">United Kingdom</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-            </div>
-
-            <div className="space-y-2">
-              <label className="text-sm font-medium">Message</label>
-              <Textarea placeholder="Enter your message..." />
-            </div>
-
-            <div className="flex items-center space-x-4">
-              <div className="flex items-center space-x-2">
-                <Checkbox
-                  id="terms"
-                  checked={isChecked}
-                  onCheckedChange={(checked) => setIsChecked(checked === true)}
-                />
-                <label htmlFor="terms" className="text-sm">
-                  I agree to the terms
-                </label>
-              </div>
-
-              <div className="flex items-center space-x-2">
-                <Switch id="notifications" />
-                <label htmlFor="notifications" className="text-sm">
-                  Email notifications
-                </label>
-              </div>
-            </div>
-
-            <div className="space-y-2">
-              <label className="text-sm font-medium">Preferred Contact</label>
-              <RadioGroup defaultValue="email" className="flex space-x-4">
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="email" id="email" />
-                  <label htmlFor="email" className="text-sm">Email</label>
+        {/* Stats */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+          {stats.map((stat) => (
+            <Card key={stat.name}>
+              <CardContent className="p-6">
+                <div className="text-center space-y-2">
+                  <div className="text-3xl font-bold text-primary">{stat.value}</div>
+                  <div className="font-medium">{stat.name}</div>
+                  <div className="text-sm text-muted-foreground">{stat.description}</div>
                 </div>
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="phone" id="phone" />
-                  <label htmlFor="phone" className="text-sm">Phone</label>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="sms" id="sms" />
-                  <label htmlFor="sms" className="text-sm">SMS</label>
-                </div>
-              </RadioGroup>
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Data Display */}
-        <Card>
-          <CardHeader>
-            <CardTitle>Data Display</CardTitle>
-            <CardDescription>Badges, avatars, and progress indicators</CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="flex gap-2 flex-wrap">
-              <Badge>Default</Badge>
-              <Badge variant="secondary">Secondary</Badge>
-              <Badge variant="success">Success</Badge>
-              <Badge variant="destructive">Error</Badge>
-              <Badge variant="outline">Outline</Badge>
-            </div>
-
-            <div className="flex items-center gap-4">
-              <Avatar>
-                <AvatarImage src="https://github.com/shadcn.png" />
-                <AvatarFallback>CN</AvatarFallback>
-              </Avatar>
-              <Avatar>
-                <AvatarFallback>AB</AvatarFallback>
-              </Avatar>
-              <Avatar>
-                <AvatarFallback>XY</AvatarFallback>
-              </Avatar>
-            </div>
-
-            <div className="space-y-2">
-              <div className="flex justify-between text-sm">
-                <span>Progress</span>
-                <span>75%</span>
-              </div>
-              <Progress value={75} />
-            </div>
-
-            {isLoading && (
-              <div className="space-y-2">
-                <Skeleton className="h-4 w-full" />
-                <Skeleton className="h-4 w-3/4" />
-                <Skeleton className="h-4 w-1/2" />
-              </div>
-            )}
-          </CardContent>
-        </Card>
-
-        {/* Tabs Demo */}
-        <Card>
-          <CardHeader>
-            <CardTitle>Tabs Navigation</CardTitle>
-            <CardDescription>Tabbed content sections</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <Tabs defaultValue="overview" className="space-y-4">
-              <TabsList>
-                <TabsTrigger value="overview">Overview</TabsTrigger>
-                <TabsTrigger value="analytics">Analytics</TabsTrigger>
-                <TabsTrigger value="settings">Settings</TabsTrigger>
-              </TabsList>
-              <TabsContent value="overview" className="space-y-4">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  <Card>
-                    <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                      <CardTitle className="text-sm font-medium">Total Users</CardTitle>
-                      <LucideIcons.Users className="h-4 w-4 text-muted-foreground" />
-                    </CardHeader>
-                    <CardContent>
-                      <div className="text-2xl font-bold">2,543</div>
-                      <p className="text-xs text-muted-foreground">+12% from last month</p>
-                    </CardContent>
-                  </Card>
-                  <Card>
-                    <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                      <CardTitle className="text-sm font-medium">Revenue</CardTitle>
-                      <LucideIcons.DollarSign className="h-4 w-4 text-muted-foreground" />
-                    </CardHeader>
-                    <CardContent>
-                      <div className="text-2xl font-bold">$12,345</div>
-                      <p className="text-xs text-muted-foreground">+8% from last month</p>
-                    </CardContent>
-                  </Card>
-                  <Card>
-                    <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                      <CardTitle className="text-sm font-medium">Active Sessions</CardTitle>
-                      <LucideIcons.Activity className="h-4 w-4 text-muted-foreground" />
-                    </CardHeader>
-                    <CardContent>
-                      <div className="text-2xl font-bold">847</div>
-                      <p className="text-xs text-muted-foreground">+23% from last hour</p>
-                    </CardContent>
-                  </Card>
-                </div>
-              </TabsContent>
-              <TabsContent value="analytics">
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Analytics Dashboard</CardTitle>
-                    <CardDescription>View your analytics data here</CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="h-32 flex items-center justify-center text-muted-foreground">
-                      <LucideIcons.BarChart className="h-8 w-8 mr-2" />
-                      Analytics charts would go here
-                    </div>
-                  </CardContent>
-                </Card>
-              </TabsContent>
-              <TabsContent value="settings">
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Settings</CardTitle>
-                    <CardDescription>Manage your preferences</CardDescription>
-                  </CardHeader>
-                  <CardContent className="space-y-4">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <p className="font-medium">Dark Mode</p>
-                        <p className="text-sm text-muted-foreground">Toggle between light and dark themes</p>
-                      </div>
-                      <ThemeToggle />
-                    </div>
-                    <Separator />
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <p className="font-medium">Push Notifications</p>
-                        <p className="text-sm text-muted-foreground">Receive notifications on your device</p>
-                      </div>
-                      <Switch />
-                    </div>
-                  </CardContent>
-                </Card>
-              </TabsContent>
-            </Tabs>
-          </CardContent>
-        </Card>
-
-        {/* Footer */}
-        <div className="text-center text-muted-foreground">
-          <p>Built with @tanqory/mies component library</p>
-          <p className="text-sm mt-1">Next.js 15 • App Router • TypeScript</p>
+              </CardContent>
+            </Card>
+          ))}
         </div>
+
+        {/* Component Categories */}
+        <div className="space-y-12">
+          {/* Core Components */}
+          <div className="space-y-6">
+            <div className="text-center space-y-2">
+              <h2 className="text-3xl font-bold">Core Components</h2>
+              <p className="text-muted-foreground">
+                Essential UI building blocks built on Radix UI primitives
+              </p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {coreComponents.map((feature) => {
+                const Icon = feature.icon;
+                return (
+                  <Link key={feature.name} href={feature.href}>
+                    <Card className="transition-all duration-200 hover:shadow-lg hover:scale-105 cursor-pointer group h-full">
+                      <CardHeader>
+                        <div className="flex items-center gap-3">
+                          <div className={`p-3 rounded-lg ${feature.color} text-primary-foreground group-hover:scale-110 transition-transform`}>
+                            <Icon className="h-6 w-6" />
+                          </div>
+                          <div className="flex-1">
+                            <CardTitle className="text-xl group-hover:text-primary transition-colors">
+                              {feature.name}
+                            </CardTitle>
+                            <Badge variant="secondary" className="mt-2">
+                              {feature.stats}
+                            </Badge>
+                          </div>
+                        </div>
+                      </CardHeader>
+                      <CardContent>
+                        <CardDescription className="text-base">{feature.description}</CardDescription>
+                      </CardContent>
+                    </Card>
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Extended Components */}
+          <div className="space-y-6">
+            <div className="text-center space-y-2">
+              <h2 className="text-3xl font-bold">Extended Components (Mies X)</h2>
+              <p className="text-muted-foreground">
+                Advanced dashboard components via <code className="bg-muted px-2 py-1 rounded">@tanqory/mies/x</code>
+              </p>
+            </div>
+            <div className="grid grid-cols-1 gap-6 max-w-2xl mx-auto">
+              {extendedComponents.map((feature) => {
+                const Icon = feature.icon;
+                return (
+                  <Link key={feature.name} href={feature.href}>
+                    <Card className="transition-all duration-200 hover:shadow-lg hover:scale-105 cursor-pointer group h-full">
+                      <CardHeader>
+                        <div className="flex items-center gap-3">
+                          <div className={`p-3 rounded-lg ${feature.color} text-white group-hover:scale-110 transition-transform`}>
+                            <Icon className="h-6 w-6" />
+                          </div>
+                          <div className="flex-1">
+                            <CardTitle className="text-xl group-hover:text-primary transition-colors">
+                              {feature.name}
+                            </CardTitle>
+                            <Badge variant="outline" className="mt-2">
+                              {feature.stats}
+                            </Badge>
+                          </div>
+                        </div>
+                      </CardHeader>
+                      <CardContent>
+                        <CardDescription className="text-base">{feature.description}</CardDescription>
+                      </CardContent>
+                    </Card>
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Component Blocks */}
+          <div className="space-y-6">
+            <div className="text-center space-y-2">
+              <h2 className="text-3xl font-bold">Component Blocks</h2>
+              <p className="text-muted-foreground">
+                Pre-built complex patterns for rapid application development
+              </p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {componentBlocks.map((feature) => {
+              const Icon = feature.icon;
+              return (
+                <Link key={feature.name} href={feature.href}>
+                  <Card className="transition-all duration-200 hover:shadow-lg hover:scale-105 cursor-pointer group">
+                    <CardHeader>
+                      <div className="flex items-center gap-3">
+                        <div className={`p-2 rounded-lg ${feature.color} text-white group-hover:scale-110 transition-transform`}>
+                          <Icon className="h-5 w-5" />
+                        </div>
+                        <div className="flex-1">
+                          <CardTitle className="text-lg group-hover:text-primary transition-colors">
+                            {feature.name}
+                          </CardTitle>
+                          <Badge variant="outline" className="mt-1">
+                            {feature.stats}
+                          </Badge>
+                        </div>
+                      </div>
+                    </CardHeader>
+                    <CardContent>
+                      <CardDescription>{feature.description}</CardDescription>
+                    </CardContent>
+                  </Card>
+                </Link>
+              );
+            })}
+            </div>
+          </div>
+        </div>
+
+        {/* Getting Started */}
+        <Card>
+          <CardHeader className="text-center">
+            <CardTitle className="text-2xl">Ready to Get Started?</CardTitle>
+            <CardDescription>
+              Choose your preferred framework and start building amazing applications
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <Card className="border-2 border-dashed">
+                <CardContent className="p-6 text-center space-y-4">
+                  <div className="w-12 h-12 mx-auto bg-primary/10 rounded-lg flex items-center justify-center">
+                    <LucideIcons.Package className="h-6 w-6 text-primary" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold">Installation</h3>
+                    <p className="text-sm text-muted-foreground mt-1">
+                      Install via npm or yarn
+                    </p>
+                  </div>
+                  <div className="bg-muted p-3 rounded-lg font-mono text-sm">
+                    npm install @tanqory/mies
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card className="border-2 border-dashed">
+                <CardContent className="p-6 text-center space-y-4">
+                  <div className="w-12 h-12 mx-auto bg-primary/10 rounded-lg flex items-center justify-center">
+                    <LucideIcons.Code className="h-6 w-6 text-primary" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold">Usage</h3>
+                    <p className="text-sm text-muted-foreground mt-1">
+                      Import and use components
+                    </p>
+                  </div>
+                  <div className="bg-muted p-3 rounded-lg font-mono text-sm text-left">
+                    import &#123; Button &#125; from &apos;@tanqory/mies&apos;
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+
+            <div className="text-center space-y-4">
+              <div className="flex gap-4 justify-center">
+                <Button asChild>
+                  <Link href="/components">
+                    Browse All Components
+                  </Link>
+                </Button>
+                <Button variant="outline" asChild>
+                  <Link href="https://storybook.tanqory.com" target="_blank">
+                    View Storybook
+                  </Link>
+                </Button>
+              </div>
+              <p className="text-sm text-muted-foreground">
+                Built with Next.js 15, TypeScript, and Tailwind CSS
+              </p>
+            </div>
+          </CardContent>
+        </Card>
       </div>
-    </main>
+    </PageLayout>
   );
 }

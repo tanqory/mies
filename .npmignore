@@ -35,6 +35,9 @@ examples/
 demo/
 docs/
 
+# Internal development files
+.internal-*
+
 # Miscellaneous
 *.tgz
 *.tar.gz
